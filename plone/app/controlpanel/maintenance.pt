@@ -161,8 +161,16 @@
                                    value="Pack database now"
                                    i18n:attributes="value"
                                    class="standalone" />
+                        
+                        <input type="submit"
+                                   id="form.actions.backup"
+                                   name="form.actions.backup"
+                                   value="Backup Plone Site"
+                                   i18n:attributes="value"
+                                   class="standalone" />
                         </span>
                     </div>
+
 
                 </fieldset>
 
