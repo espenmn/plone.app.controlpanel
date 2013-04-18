@@ -96,7 +96,7 @@ class MaintenanceControlPanel(FieldsetsEditForm):
             context = aq_inner(self.context)
             cpanel = context.unrestrictedTraverse('/Control_Panel')
             context.manage_exportObject() 
-        self.status = _(u'The database has been taken backup of (probably in /var/instance).')
+        self.status = _(u'The plone site has been taken backup of (probably in /var/instance).')
 
 
 
