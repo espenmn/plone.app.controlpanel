@@ -82,6 +82,24 @@ class MaintenanceControlPanel(FieldsetsEditForm):
             cpanel.manage_pack(days=value, REQUEST=None)
         self.status = _(u'Packed the database.')
 
+    @form.action(_(u'Backup database now'), name=u'backup')
+    def handle_edit_action(self, action, data):
+        CheckAuthenticator(self.request)
+        if not self.available():
+            self.status = _(u'text_not_allowed_manage_server',
+                            default=u'You are not allowed to manage the Zope server.')
+            return
+        form.applyChanges(self.context, self.form_fields, data, self.adapters)
+        value = data.get('days', None)
+        # skip the actual backup method in tests 
+        if value is not None:
+            context = aq_inner(self.context)
+            cpanel = context.unrestrictedTraverse('/Control_Panel')
+            context.manage_exportObject() 
+        self.status = _(u'The database has been taken backup of (probably in /var/instance).')
+
+
+
     @form.action(_(u'Shut down'), validator=null_validator, name=u'shutdown')
     def handle_shutdown_action(self, action, data):
         CheckAuthenticator(self.request)
